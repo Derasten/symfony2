@@ -1,0 +1,8 @@
+43991539f5d6a9bd3a755fe673cea274cd178733,::1,GET,http://localhost/symfony2/web/app_dev.php/_configurator/,1365435635,
+53f6b3c0daa4c5f231f648c1acf5d66077dd7784,::1,GET,http://localhost/symfony2/web/app_dev.php/_configurator/step/0,1365435639,
+a79b2584b2a76cf9a3d5d962bbb79392c4c979cf,::1,POST,http://localhost/symfony2/web/app_dev.php/_configurator/step/0,1365435793,
+1a02980b345b23a20d60eb782fe0621055e5f6b0,::1,GET,http://localhost/symfony2/web/app_dev.php/_configurator/step/1,1365435797,
+828f175de549ecbd4577b3b85496873c4c8c94ca,::1,POST,http://localhost/symfony2/web/app_dev.php/_configurator/step/1,1365435873,
+d22eef5294ad622c91295cf17b79efb2b639c5ff,::1,GET,http://localhost/symfony2/web/app_dev.php/_configurator/final,1365435875,
+6c32a4a66c422babc61768341c6f2a75b45a15e8,::1,GET,http://localhost/symfony2/web/app_dev.php/,1365435886,
+e4d7fb870562649f570cfc2fece9e3b6bae33d2a,::1,GET,http://localhost/symfony2/web/app_dev.php/,1365438346,

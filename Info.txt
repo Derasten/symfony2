@@ -1,0 +1,3 @@
+Clave BBDD Symfony2
+be70510964dc9cce24605035ec43c224c0103ffd
+en la base de datos symfony2 en localhost
