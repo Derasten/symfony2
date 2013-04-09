@@ -1,0 +1,4 @@
+weather_page:
+    pattern:  /{city}
+    defaults: { _controller: PruebaInicialBundle:Default:index, city : 'New York' }
+  
