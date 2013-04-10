@@ -31,7 +31,7 @@ class DefaultController extends Controller
                 $message = \Swift_Message::newInstance()
                          ->setSubject('Contact enquiry from symblog')
                          ->setFrom('enquiries@symblog.co.uk')
-                         ->setTo('email@email.com')
+                         ->setTo($this->container->getParameter('blogger_blog.emails.contact_email'))
                          ->setBody($this->renderView('PruebaInicialBundle:Default:contactEmail.txt.twig', array('enquiry' => $enquiry)));
                 
                 $this->get('mailer')->send($message);

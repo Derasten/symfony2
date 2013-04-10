@@ -1,6 +1,8 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    # Parametro de email que se encuentra en el Bundle
+    - { resource: @PruebaInicialBundle/Resources/config/config.yml }
 
 framework:
     #esi:             ~

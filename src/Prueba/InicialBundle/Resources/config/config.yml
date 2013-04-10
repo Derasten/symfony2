@@ -1,0 +1,4 @@
+# src/Prueba/InicialBundle/Resources/config/config.yml
+parameters:
+    # dirección de correo electrónico para contacto del Blogger
+    blogger_blog.emails.contact_email: direccion@dominio.com
