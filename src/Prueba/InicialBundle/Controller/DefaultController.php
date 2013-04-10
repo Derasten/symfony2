@@ -19,24 +19,30 @@ class DefaultController extends Controller
     }
     
     public function contactAction(){
-         $enquiry = new Enquiry();
-    $form = $this->createForm(new EnquiryType(), $enquiry);
+        $enquiry = new Enquiry();
+        $form = $this->createForm(new EnquiryType(), $enquiry);
 
-    $request = $this->getRequest();
-    if ($request->getMethod() == 'POST') {
-        $form->bindRequest($request);
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $form->bindRequest($request);
 
-        if ($form->isValid()) {
-            // realiza alguna acción, como enviar un correo electrónico
+            if ($form->isValid()) {
+                // realiza alguna acción, como enviar un correo electrónico
+                $message = \Swift_Message::newInstance()
+                         ->setSubject('Contact enquiry from symblog')
+                         ->setFrom('enquiries@symblog.co.uk')
+                         ->setTo('email@email.com')
+                         ->setBody($this->renderView('PruebaInicialBundle:Default:contactEmail.txt.twig', array('enquiry' => $enquiry)));
+                
+                $this->get('mailer')->send($message);
 
-            // Redirige - Esto es importante para prevenir que el usuario
-            // reenvíe el formulario si actualiza la página
-            return $this->redirect($this->generateUrl('PruebaInicialBundle_contact'));
+                $this->get('session')->setFlash('blogger-notice', 'Your contact enquiry was successfully sent. Thank you!');
+                // Redirige - Esto es importante para prevenir que el usuario
+                // reenvíe el formulario si actualiza la página
+                return $this->redirect($this->generateUrl('PruebaInicialBundle_contact'));
+            }
         }
-    }
 
-    return $this->render('PruebaInicialBundle:Default:contact.html.twig', array(
-        'form' => $form->createView()
-    ));
+        return $this->render('PruebaInicialBundle:Default:contact.html.twig', array('form' => $form->createView()));
     }
 }
