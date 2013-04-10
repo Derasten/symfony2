@@ -13,7 +13,7 @@
     <form action="{{ path('PruebaInicialBundle_contact') }}" method="post" {{ form_enctype(form) }} class="blogger">
         {{ form_errors(form) }}
 
-        {{ form_row(form.name) }}
+        {{ form_row(form.nombre) }}
         {{ form_row(form.email) }}
         {{ form_row(form.subject) }}
         {{ form_row(form.body) }}

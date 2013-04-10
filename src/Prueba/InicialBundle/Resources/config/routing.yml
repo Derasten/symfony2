@@ -1,13 +1,19 @@
 PruebaInicialBundle_page:
     pattern:  /
     defaults: { _controller: PruebaInicialBundle:Default:index}
+    requirements:
+        _method:  GET
   
 # src/Prueba/InicialBundle/Resources/config/routing.yml
 PruebaInicialBundle_about:
     pattern:  /about
     defaults: { _controller: PruebaInicialBundle:Default:about }
+    requirements:
+        _method:  GET
 
 # src/Prueba/InicialBundle/Resources/config/routing.yml
 PruebaInicialBundle_contact:
     pattern:  /contact
     defaults: { _controller: PruebaInicialBundle:Default:contact }
+    requirements:
+        _method:  GET|POST

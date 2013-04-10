@@ -5,10 +5,19 @@ parameters:
     database_name: symfony2
     database_user: root
     database_password: null
-    mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
+    # Configuración de email
+    mailer_transport: gmail
+    mailer_encryption: ssl
+    mailer_auth_mode: login
+    mailer_host: smtp.gmail.com
+    mailer_user: your_username
+    mailer_password: your_password
+    
+    #mailer_transport: smtp
+    #mailer_host: 127.0.0.1
+    #mailer_user: null
+    #mailer_password: null
+   
     locale: en
     secret: be70510964dc9cce24605035ec43c224c0103ffd
     database_path: null
