@@ -35,8 +35,8 @@ class DefaultController extends Controller
                          ->setBody($this->renderView('PruebaInicialBundle:Default:contactEmail.txt.twig', array('enquiry' => $enquiry)));
                 
                 $this->get('mailer')->send($message);
-
-                $this->get('session')->setFlash('blogger-notice', 'Your contact enquiry was successfully sent. Thank you!');
+                $this->get('session')->getFlashBag()->add('blogger-notice', 'Your contact enquiry was successfully sent. Thank you!');
+                #$this->get('session')->setFlash('blogger-notice', 'Your contact enquiry was successfully sent. Thank you!');
                 // Redirige - Esto es importante para prevenir que el usuario
                 // reenvíe el formulario si actualiza la página
                 return $this->redirect($this->generateUrl('PruebaInicialBundle_contact'));
