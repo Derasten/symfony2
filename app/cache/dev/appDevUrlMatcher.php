@@ -133,9 +133,23 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // weather_page
-        if (preg_match('#^/(?P<city>[^/]++)?$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'weather_page')), array (  '_controller' => 'Prueba\\InicialBundle\\Controller\\DefaultController::indexAction',  'city' => 'New York',));
+        // PruebaInicialBundle_page
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'PruebaInicialBundle_page');
+            }
+
+            return array (  '_controller' => 'Prueba\\InicialBundle\\Controller\\DefaultController::indexAction',  '_route' => 'PruebaInicialBundle_page',);
+        }
+
+        // PruebaInicialBundle_about
+        if ($pathinfo === '/about') {
+            return array (  '_controller' => 'Prueba\\InicialBundle\\Controller\\DefaultController::aboutAction',  '_route' => 'PruebaInicialBundle_about',);
+        }
+
+        // PruebaInicialBundle_contact
+        if ($pathinfo === '/contact') {
+            return array (  '_controller' => 'Prueba\\InicialBundle\\Controller\\DefaultController::contactAction',  '_route' => 'PruebaInicialBundle_contact',);
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

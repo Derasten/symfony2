@@ -1,4 +1,13 @@
-weather_page:
-    pattern:  /{city}
-    defaults: { _controller: PruebaInicialBundle:Default:index, city : 'New York' }
+PruebaInicialBundle_page:
+    pattern:  /
+    defaults: { _controller: PruebaInicialBundle:Default:index}
   
+# src/Prueba/InicialBundle/Resources/config/routing.yml
+PruebaInicialBundle_about:
+    pattern:  /about
+    defaults: { _controller: PruebaInicialBundle:Default:about }
+
+# src/Prueba/InicialBundle/Resources/config/routing.yml
+PruebaInicialBundle_contact:
+    pattern:  /contact
+    defaults: { _controller: PruebaInicialBundle:Default:contact }

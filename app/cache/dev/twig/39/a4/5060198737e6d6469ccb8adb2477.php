@@ -24,17 +24,15 @@ class __TwigTemplate_39a45060198737e6d6469ccb8adb2477 extends Twig_Template
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        // line 1
-        echo "<!-- app/Resources/views/base.html.twig -->
-<!-- Aquí se pone la plantilla base de la página para extenderla más tarde. -->
-<!DOCTYPE html>
+        // line 3
+        echo "<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv=\"Content-Type\" content=\"text/html\"; charset=utf-8\" />
         <title>";
         // line 7
         $this->displayBlock('title', $context, $blocks);
-        echo " - symblog</title>
+        echo " - symfony2</title>
         <!--[if lt IE 9]>
             <script src=\"http://html5shim.googlecode.com/svn/trunk/html5.js\"></script>
         <![endif]-->
@@ -101,7 +99,7 @@ class __TwigTemplate_39a45060198737e6d6469ccb8adb2477 extends Twig_Template
     // line 7
     public function block_title($context, array $blocks = array())
     {
-        echo "symblog";
+        echo "Prueba-Symfony2";
     }
 
     // line 11
@@ -123,9 +121,18 @@ class __TwigTemplate_39a45060198737e6d6469ccb8adb2477 extends Twig_Template
         // line 24
         echo "                        <nav>
                             <ul class=\"navigation\">
-                                <li><a href=\"#\">Home</a></li>
-                                <li><a href=\"#\">About</a></li>
-                                <li><a href=\"#\">Contact</a></li>
+                                <li><a href=\"";
+        // line 26
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("PruebaInicialBundle_page"), "html", null, true);
+        echo "\">Home</a></li>
+                                <li><a href=\"";
+        // line 27
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("PruebaInicialBundle_about"), "html", null, true);
+        echo "\">About</a></li>
+                                <li><a href=\"";
+        // line 28
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("PruebaInicialBundle_contact"), "html", null, true);
+        echo "\">Contact</a></li>
                             </ul>
                         </nav>
                     ";
@@ -178,6 +185,6 @@ class __TwigTemplate_39a45060198737e6d6469ccb8adb2477 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  165 => 54,  160 => 49,  157 => 48,  152 => 44,  147 => 41,  141 => 36,  135 => 35,  124 => 24,  121 => 23,  115 => 14,  111 => 12,  108 => 11,  102 => 7,  97 => 55,  95 => 54,  90 => 51,  88 => 48,  83 => 45,  81 => 44,  77 => 42,  75 => 41,  67 => 36,  63 => 35,  58 => 32,  56 => 23,  45 => 16,  43 => 11,  36 => 7,  28 => 1,);
+        return array (  172 => 54,  167 => 49,  164 => 48,  159 => 44,  154 => 41,  148 => 36,  142 => 35,  134 => 28,  130 => 27,  126 => 26,  122 => 24,  119 => 23,  113 => 14,  109 => 12,  106 => 11,  100 => 7,  95 => 55,  93 => 54,  88 => 51,  86 => 48,  81 => 45,  79 => 44,  75 => 42,  73 => 41,  56 => 32,  54 => 23,  43 => 16,  41 => 11,  34 => 7,  28 => 3,  74 => 21,  69 => 19,  65 => 36,  61 => 35,  57 => 16,  52 => 14,  46 => 13,  38 => 7,  35 => 6,  29 => 4,);
     }
 }
