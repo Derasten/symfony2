@@ -33,6 +33,7 @@ class appDevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
         'PruebaInicialBundle_page' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'Prueba\\InicialBundle\\Controller\\DefaultController::indexAction',  ),  2 =>   array (    '_method' => 'GET',  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/',    ),  ),  4 =>   array (  ),),
         'PruebaInicialBundle_about' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'Prueba\\InicialBundle\\Controller\\DefaultController::aboutAction',  ),  2 =>   array (    '_method' => 'GET',  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/about',    ),  ),  4 =>   array (  ),),
         'PruebaInicialBundle_contact' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'Prueba\\InicialBundle\\Controller\\DefaultController::contactAction',  ),  2 =>   array (    '_method' => 'GET|POST',  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/contact',    ),  ),  4 =>   array (  ),),
+        'PruebaInicialBundle_blog_show' => array (  0 =>   array (    0 => 'id',  ),  1 =>   array (    '_controller' => 'Prueba\\InicialBundle\\Controller\\BlogController::showAction',  ),  2 =>   array (    '_method' => 'GET',    'id' => '\\d+',  ),  3 =>   array (    0 =>     array (      0 => 'variable',      1 => '/',      2 => '\\d+',      3 => 'id',    ),  ),  4 =>   array (  ),),
     );
 
     /**

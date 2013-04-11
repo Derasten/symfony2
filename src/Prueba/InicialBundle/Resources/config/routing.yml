@@ -17,3 +17,16 @@ PruebaInicialBundle_contact:
     defaults: { _controller: PruebaInicialBundle:Default:contact }
     requirements:
         _method:  GET|POST
+        
+# src/Prueba/InicialBundle/Resources/config/routing.yml
+PruebaInicialBundle_blog_show:
+    pattern:  /{id}
+    defaults: { _controller: PruebaInicialBundle:Blog:show }
+    requirements:
+        _method:  GET
+        id: \d+
+        
+#De momento lo comento 
+#show:
+#    pattern: /show
+#    defaults: { _controller: PruebaInicialBundle:Blog:show }

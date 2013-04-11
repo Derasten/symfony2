@@ -103,3 +103,6 @@
 [2013-04-10 17:19:56] request.ERROR: Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET /bundles/framework/css/structure.css"" at C:\xampp\htdocs\symfony2\app\cache\prod\classes.php line 3597 [] []
 [2013-04-10 17:19:56] request.ERROR: Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET /bundles/framework/css/body.css"" at C:\xampp\htdocs\symfony2\app\cache\prod\classes.php line 3597 [] []
 [2013-04-10 17:19:56] request.ERROR: Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET /bundles/framework/css/exception.css"" at C:\xampp\htdocs\symfony2\app\cache\prod\classes.php line 3597 [] []
+[2013-04-11 16:09:10] request.ERROR: Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET /bundles/framework/css/structure.css"" at C:\xampp\htdocs\symfony2\app\cache\prod\classes.php line 3597 [] []
+[2013-04-11 16:09:10] request.ERROR: Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET /bundles/framework/css/body.css"" at C:\xampp\htdocs\symfony2\app\cache\prod\classes.php line 3597 [] []
+] []
