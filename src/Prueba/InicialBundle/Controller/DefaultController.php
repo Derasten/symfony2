@@ -11,7 +11,15 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('PruebaInicialBundle:Default:index.html.twig');
+        $em = $this->getDoctrine()
+                   ->getManager();
+
+        $blogs = $em->getRepository('PruebaInicialBundle:Blog')
+                    ->getLatestBlogs();//Aquí se le pasa el numero maximo de entradas a mostrar, si no se pasa nada se muestran todas
+        
+        return $this->render('PruebaInicialBundle:Default:index.html.twig', array(
+            'blogs' => $blogs
+        ));
     }
     
     public function aboutAction(){
