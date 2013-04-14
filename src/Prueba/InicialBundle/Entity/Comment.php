@@ -5,6 +5,9 @@ namespace Prueba\InicialBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
 
 /**
  * @ORM\Entity(repositoryClass="Prueba\InicialBundle\Entity\Repository\CommentRepository")
@@ -57,6 +60,16 @@ class Comment
         $this->setUpdated(new \DateTime());
 
         $this->setApproved(true);
+    }
+    
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('user', new NotBlank(array(
+            'message' => 'You must enter your name'
+        )));
+        $metadata->addPropertyConstraint('comment', new NotBlank(array(
+            'message' => 'You must enter a comment'
+        )));
     }
 
     /**

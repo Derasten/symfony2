@@ -30,3 +30,11 @@ PruebaInicialBundle_blog_show:
 #show:
 #    pattern: /show
 #    defaults: { _controller: PruebaInicialBundle:Blog:show }
+
+# src/Prueba/InicialBundle/Resources/config/routing.yml
+PruebaInicialBundle_comment_create:
+    pattern:  /comment/{blog_id}
+    defaults: { _controller: PruebaInicialBundle:Comment:create }
+    requirements:
+        _method:  POST
+        blog_id: \d+

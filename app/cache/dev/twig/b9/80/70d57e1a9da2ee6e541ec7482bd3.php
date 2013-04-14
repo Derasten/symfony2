@@ -69,7 +69,13 @@ class __TwigTemplate_b98070d57e1a9da2ee6e541ec7482bd3 extends Twig_Template
         $this->env->loadTemplate("PruebaInicialBundle:Comment:index.html.twig")->display(array_merge($context, array("comments" => (isset($context["comments"]) ? $context["comments"] : $this->getContext($context, "comments")))));
         // line 21
         echo "        </section>
-    </section>
+         <h3>Add Comment</h3>
+        ";
+        // line 23
+        echo $this->env->getExtension('actions')->renderUri($this->env->getExtension('http_kernel')->controller("PruebaInicialBundle:Comment:new", array("blog_id" => $this->getAttribute((isset($context["blog"]) ? $context["blog"] : $this->getContext($context, "blog")), "id"))), array());
+        echo " ";
+        // line 24
+        echo "    </section>
 ";
     }
 
@@ -85,6 +91,6 @@ class __TwigTemplate_b98070d57e1a9da2ee6e541ec7482bd3 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  71 => 21,  69 => 20,  60 => 14,  53 => 12,  48 => 10,  42 => 9,  38 => 7,  35 => 6,  29 => 4,);
+        return array (  78 => 24,  75 => 23,  71 => 21,  69 => 20,  60 => 14,  53 => 12,  48 => 10,  42 => 9,  38 => 7,  35 => 6,  29 => 4,);
     }
 }

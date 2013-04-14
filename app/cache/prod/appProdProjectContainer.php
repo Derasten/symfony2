@@ -67,36 +67,38 @@ class appProdProjectContainer extends Container
     }
     protected function getDoctrine_Dbal_DefaultConnectionService()
     {
-        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('dbname' => 'symfony', 'host' => '127.0.0.1', 'port' => NULL, 'user' => 'root', 'password' => NULL, 'charset' => 'UTF8', 'driver' => 'pdo_mysql', 'driverOptions' => array()), new \Doctrine\DBAL\Configuration(), new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
+        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('dbname' => 'symfony2', 'host' => '127.0.0.1', 'port' => NULL, 'user' => 'root', 'password' => NULL, 'charset' => 'UTF8', 'driver' => 'pdo_mysql', 'driverOptions' => array()), new \Doctrine\DBAL\Configuration(), new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
     }
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once 'C:/xampp/htdocs/symfony2/app/cache/prod/jms_diextra/doctrine/EntityManager_5162e17b26412.php';
+        require_once 'C:/xampp/htdocs/symfony2/app/cache/prod/jms_diextra/doctrine/EntityManager_516b0fd6bcbb0.php';
         $a = new \Doctrine\Common\Cache\ArrayCache();
         $a->setNamespace('sf2orm_default_9752e8b5884eb5c00a045dc73e433bf5');
         $b = new \Doctrine\Common\Cache\ArrayCache();
         $b->setNamespace('sf2orm_default_9752e8b5884eb5c00a045dc73e433bf5');
         $c = new \Doctrine\Common\Cache\ArrayCache();
         $c->setNamespace('sf2orm_default_9752e8b5884eb5c00a045dc73e433bf5');
-        $d = new \Doctrine\ORM\Configuration();
-        $d->setEntityNamespaces(array());
-        $d->setMetadataCacheImpl($a);
-        $d->setQueryCacheImpl($b);
-        $d->setResultCacheImpl($c);
-        $d->setMetadataDriverImpl(new \Doctrine\ORM\Mapping\Driver\DriverChain());
-        $d->setProxyDir('C:/xampp/htdocs/symfony2/app/cache/prod/doctrine/orm/Proxies');
-        $d->setProxyNamespace('Proxies');
-        $d->setAutoGenerateProxyClasses(false);
-        $d->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
-        $d->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
-        $d->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
-        $e = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $d);
-        $this->get('doctrine.orm.default_manager_configurator')->configure($e);
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager5162e17b26412_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($e, $this);
+        $d = new \Doctrine\ORM\Mapping\Driver\DriverChain();
+        $d->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => 'C:\\xampp\\htdocs\\symfony2\\src\\Prueba\\InicialBundle\\Entity')), 'Prueba\\InicialBundle\\Entity');
+        $e = new \Doctrine\ORM\Configuration();
+        $e->setEntityNamespaces(array('PruebaInicialBundle' => 'Prueba\\InicialBundle\\Entity'));
+        $e->setMetadataCacheImpl($a);
+        $e->setQueryCacheImpl($b);
+        $e->setResultCacheImpl($c);
+        $e->setMetadataDriverImpl($d);
+        $e->setProxyDir('C:/xampp/htdocs/symfony2/app/cache/prod/doctrine/orm/Proxies');
+        $e->setProxyNamespace('Proxies');
+        $e->setAutoGenerateProxyClasses(false);
+        $e->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
+        $e->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
+        $e->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
+        $f = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $e);
+        $this->get('doctrine.orm.default_manager_configurator')->configure($f);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager516b0fd6bcbb0_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($f, $this);
     }
     protected function getDoctrine_Orm_DefaultManagerConfiguratorService()
     {
-        return $this->services['doctrine.orm.default_manager_configurator'] = new \Doctrine\Bundle\DoctrineBundle\ManagerConfigurator(array());
+        return $this->services['doctrine.orm.default_manager_configurator'] = new \Doctrine\Bundle\DoctrineBundle\ManagerConfigurator(array(), array());
     }
     protected function getDoctrine_Orm_Validator_UniqueService()
     {
@@ -140,7 +142,7 @@ class appProdProjectContainer extends Container
     }
     protected function getForm_CsrfProviderService()
     {
-        return $this->services['form.csrf_provider'] = new \Symfony\Component\Form\Extension\Csrf\CsrfProvider\SessionCsrfProvider($this->get('session'), 'ThisTokenIsNotSoSecretChangeIt');
+        return $this->services['form.csrf_provider'] = new \Symfony\Component\Form\Extension\Csrf\CsrfProvider\SessionCsrfProvider($this->get('session'), 'be70510964dc9cce24605035ec43c224c0103ffd');
     }
     protected function getForm_FactoryService()
     {
@@ -639,12 +641,12 @@ class appProdProjectContainer extends Container
     protected function getSwiftmailer_Transport_RealService()
     {
         $this->services['swiftmailer.transport.real'] = $instance = new \Swift_Transport_EsmtpTransport(new \Swift_Transport_StreamBuffer(new \Swift_StreamFilters_StringReplacementFilterFactory()), array(0 => new \Swift_Transport_Esmtp_AuthHandler(array(0 => new \Swift_Transport_Esmtp_Auth_CramMd5Authenticator(), 1 => new \Swift_Transport_Esmtp_Auth_LoginAuthenticator(), 2 => new \Swift_Transport_Esmtp_Auth_PlainAuthenticator()))), $this->get('swiftmailer.transport.eventdispatcher'));
-        $instance->setHost('127.0.0.1');
-        $instance->setPort(25);
-        $instance->setEncryption(NULL);
-        $instance->setUsername(NULL);
-        $instance->setPassword(NULL);
-        $instance->setAuthMode(NULL);
+        $instance->setHost('smtp.gmail.com');
+        $instance->setPort(465);
+        $instance->setEncryption('ssl');
+        $instance->setUsername('reiv.matt@gmail.com');
+        $instance->setPassword('MazdaRx7fd%5');
+        $instance->setAuthMode('login');
         $instance->setTimeout(30);
         $instance->setSourceIp(NULL);
         return $instance;
@@ -890,6 +892,7 @@ class appProdProjectContainer extends Container
         $instance->addPath('C:\\xampp\\htdocs\\symfony2\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\TwigBundle/Resources/views', 'Twig');
         $instance->addPath('C:\\xampp\\htdocs\\symfony2\\vendor\\symfony\\swiftmailer-bundle\\Symfony\\Bundle\\SwiftmailerBundle/Resources/views', 'Swiftmailer');
         $instance->addPath('C:\\xampp\\htdocs\\symfony2\\vendor\\doctrine\\doctrine-bundle\\Doctrine\\Bundle\\DoctrineBundle/Resources/views', 'Doctrine');
+        $instance->addPath('C:\\xampp\\htdocs\\symfony2\\src\\Prueba\\InicialBundle/Resources/views', 'PruebaInicial');
         $instance->addPath('C:/xampp/htdocs/symfony2/app/Resources/views');
         return $instance;
     }
@@ -899,7 +902,7 @@ class appProdProjectContainer extends Container
     }
     protected function getUriSignerService()
     {
-        return $this->services['uri_signer'] = new \Symfony\Component\HttpKernel\UriSigner('ThisTokenIsNotSoSecretChangeIt');
+        return $this->services['uri_signer'] = new \Symfony\Component\HttpKernel\UriSigner('be70510964dc9cce24605035ec43c224c0103ffd');
     }
     protected function getValidatorService()
     {
@@ -1002,7 +1005,7 @@ class appProdProjectContainer extends Container
             'kernel.root_dir' => 'C:/xampp/htdocs/symfony2/app',
             'kernel.environment' => 'prod',
             'kernel.debug' => false,
-            'kernel.name' => 'app',
+            'kernel.name' => 'ap_',
             'kernel.cache_dir' => 'C:/xampp/htdocs/symfony2/app/cache/prod',
             'kernel.logs_dir' => 'C:/xampp/htdocs/symfony2/app/logs',
             'kernel.bundles' => array(
@@ -1017,21 +1020,28 @@ class appProdProjectContainer extends Container
                 'JMSAopBundle' => 'JMS\\AopBundle\\JMSAopBundle',
                 'JMSDiExtraBundle' => 'JMS\\DiExtraBundle\\JMSDiExtraBundle',
                 'JMSSecurityExtraBundle' => 'JMS\\SecurityExtraBundle\\JMSSecurityExtraBundle',
+                'PruebaInicialBundle' => 'Prueba\\InicialBundle\\PruebaInicialBundle',
+                'DoctrineFixturesBundle' => 'Doctrine\\Bundle\\FixturesBundle\\DoctrineFixturesBundle',
+                'DoctrineMigrationsBundle' => 'Doctrine\\Bundle\\MigrationsBundle\\DoctrineMigrationsBundle',
             ),
             'kernel.charset' => 'UTF-8',
             'kernel.container_class' => 'appProdProjectContainer',
             'database_driver' => 'pdo_mysql',
             'database_host' => '127.0.0.1',
             'database_port' => NULL,
-            'database_name' => 'symfony',
+            'database_name' => 'symfony2',
             'database_user' => 'root',
             'database_password' => NULL,
-            'mailer_transport' => 'smtp',
-            'mailer_host' => '127.0.0.1',
-            'mailer_user' => NULL,
-            'mailer_password' => NULL,
+            'mailer_transport' => 'gmail',
+            'mailer_encryption' => 'ssl',
+            'mailer_auth_mode' => 'login',
+            'mailer_host' => 'smtp.gmail.com',
+            'mailer_user' => 'reiv.matt@gmail.com',
+            'mailer_password' => 'MazdaRx7fd%5',
             'locale' => 'en',
-            'secret' => 'ThisTokenIsNotSoSecretChangeIt',
+            'secret' => 'be70510964dc9cce24605035ec43c224c0103ffd',
+            'database_path' => NULL,
+            'blogger_blog.emails.contact_email' => 'no-direccion@dominio.com',
             'controller_resolver.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver',
             'controller_name_converter.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerNameParser',
             'response_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener',
@@ -1075,7 +1085,7 @@ class appProdProjectContainer extends Container
             'translation.loader.class' => 'Symfony\\Bundle\\FrameworkBundle\\Translation\\TranslationLoader',
             'translation.extractor.class' => 'Symfony\\Component\\Translation\\Extractor\\ChainExtractor',
             'translation.writer.class' => 'Symfony\\Component\\Translation\\Writer\\TranslationWriter',
-            'kernel.secret' => 'ThisTokenIsNotSoSecretChangeIt',
+            'kernel.secret' => 'be70510964dc9cce24605035ec43c224c0103ffd',
             'kernel.trusted_proxies' => array(
             ),
             'kernel.trust_proxy_headers' => false,
@@ -1333,12 +1343,12 @@ class appProdProjectContainer extends Container
             'swiftmailer.plugin.antiflood.sleep' => 0,
             'swiftmailer.data_collector.class' => 'Symfony\\Bridge\\Swiftmailer\\DataCollector\\MessageDataCollector',
             'swiftmailer.transport.smtp.class' => 'Swift_Transport_EsmtpTransport',
-            'swiftmailer.transport.smtp.encryption' => NULL,
-            'swiftmailer.transport.smtp.port' => 25,
-            'swiftmailer.transport.smtp.host' => '127.0.0.1',
-            'swiftmailer.transport.smtp.username' => NULL,
-            'swiftmailer.transport.smtp.password' => NULL,
-            'swiftmailer.transport.smtp.auth_mode' => NULL,
+            'swiftmailer.transport.smtp.encryption' => 'ssl',
+            'swiftmailer.transport.smtp.port' => 465,
+            'swiftmailer.transport.smtp.host' => 'smtp.gmail.com',
+            'swiftmailer.transport.smtp.username' => 'reiv.matt@gmail.com',
+            'swiftmailer.transport.smtp.password' => 'MazdaRx7fd%5',
+            'swiftmailer.transport.smtp.auth_mode' => 'login',
             'swiftmailer.transport.smtp.timeout' => 30,
             'swiftmailer.transport.smtp.source_ip' => NULL,
             'swiftmailer.plugin.blackhole.class' => 'Swift_Plugins_BlackholePlugin',
@@ -1473,8 +1483,8 @@ class appProdProjectContainer extends Container
             'jms_di_extra.doctrine_integration' => true,
             'jms_di_extra.cache_warmer.controller_file_blacklist' => array(
             ),
-            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/xampp/htdocs/symfony2/app/cache/prod/jms_diextra/doctrine/EntityManager_5162e17b26412.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager5162e17b26412_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/xampp/htdocs/symfony2/app/cache/prod/jms_diextra/doctrine/EntityManager_516b0fd6bcbb0.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager516b0fd6bcbb0_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'security.secured_services' => array(
             ),
             'security.access.method_interceptor.class' => 'JMS\\SecurityExtraBundle\\Security\\Authorization\\Interception\\MethodSecurityInterceptor',
@@ -1514,6 +1524,10 @@ class appProdProjectContainer extends Container
             ),
             'security.iddqd_aliases' => array(
             ),
+            'doctrine_migrations.dir_name' => 'C:/xampp/htdocs/symfony2/app/DoctrineMigrations',
+            'doctrine_migrations.namespace' => 'Application\\Migrations',
+            'doctrine_migrations.table_name' => 'migration_versions',
+            'doctrine_migrations.name' => 'Application Migrations',
             'data_collector.templates' => array(
                 'data_collector.config' => array(
                     0 => 'config',

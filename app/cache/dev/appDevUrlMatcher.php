@@ -181,6 +181,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
         not_PruebaInicialBundle_blog_show:
 
+        // PruebaInicialBundle_comment_create
+        if (0 === strpos($pathinfo, '/comment') && preg_match('#^/comment/(?P<blog_id>\\d+)$#s', $pathinfo, $matches)) {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_PruebaInicialBundle_comment_create;
+            }
+
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'PruebaInicialBundle_comment_create')), array (  '_controller' => 'Prueba\\InicialBundle\\Controller\\CommentController::createAction',));
+        }
+        not_PruebaInicialBundle_comment_create:
+
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
     }
 }

@@ -19,5 +19,7 @@
             <h3>Comments</h3>
             {% include 'PruebaInicialBundle:Comment:index.html.twig' with { 'comments': comments } %}
         </section>
+         <h3>Add Comment</h3>
+        {% render controller('PruebaInicialBundle:Comment:new',{ 'blog_id': blog.id }) %} {# Modificado, la forma antigua de era sin controller y despues del controlador with y los parámetros#}
     </section>
 {% endblock %}
