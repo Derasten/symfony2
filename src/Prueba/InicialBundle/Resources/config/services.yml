@@ -5,3 +5,7 @@ services:
 #    prueba_inicial.example:
 #        class: %prueba_inicial.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+      blog.twig.blog_extension:
+          class: Prueba\InicialBundle\Twig\Extensions\BlogExtension
+          tags:
+             - { name: twig.extension }

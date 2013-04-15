@@ -28,8 +28,8 @@ class __TwigTemplate_9e8f6c740fc263cce4027d197986ba28 extends Twig_Template
     public function block_sidebar($context, array $blocks = array())
     {
         // line 5
-        echo "    Sidebar content
-";
+        echo "    ";
+        echo $this->env->getExtension('actions')->renderUri($this->env->getExtension('http_kernel')->controller("PruebaInicialBundle:Default:sidebar"), array());
     }
 
     public function getTemplateName()

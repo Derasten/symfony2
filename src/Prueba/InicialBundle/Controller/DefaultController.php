@@ -53,4 +53,26 @@ class DefaultController extends Controller
 
         return $this->render('PruebaInicialBundle:Default:contact.html.twig', array('form' => $form->createView()));
     }
+    
+    public function sidebarAction()
+    {
+        $em = $this->getDoctrine()
+                   ->getManager();
+
+        $tags = $em->getRepository('PruebaInicialBundle:Blog')
+                   ->getTags();
+
+        $tagWeights = $em->getRepository('PruebaInicialBundle:Blog')
+                         ->getTagWeights($tags);
+        
+        $commentLimit   = $this->container
+                               ->getParameter('Prueba_blog.comments.latest_comment_limit');
+        $latestComments = $em->getRepository('PruebaInicialBundle:Comment')
+                              ->getLatestComments($commentLimit);
+
+        return $this->render('PruebaInicialBundle:Default:sidebar.html.twig', array(
+            'latestComments'    => $latestComments,
+            'tags' => $tagWeights
+        ));
+    }
 }

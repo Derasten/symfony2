@@ -38,6 +38,10 @@ class appProdProjectContainer extends Container
     {
         return $this->services['assetic.filter_manager'] = new \Symfony\Bundle\AsseticBundle\FilterManager($this, array('cssrewrite' => 'assetic.filter.cssrewrite'));
     }
+    protected function getBlog_Twig_BlogExtensionService()
+    {
+        return $this->services['blog.twig.blog_extension'] = new \Prueba\InicialBundle\Twig\Extensions\BlogExtension();
+    }
     protected function getCacheClearerService()
     {
         return $this->services['cache_clearer'] = new \Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer(array());
@@ -71,7 +75,7 @@ class appProdProjectContainer extends Container
     }
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        require_once 'C:/xampp/htdocs/symfony2/app/cache/prod/jms_diextra/doctrine/EntityManager_516b0fd6bcbb0.php';
+        require_once 'C:/xampp/htdocs/symfony2/app/cache/prod/jms_diextra/doctrine/EntityManager_516c691254aa5.php';
         $a = new \Doctrine\Common\Cache\ArrayCache();
         $a->setNamespace('sf2orm_default_9752e8b5884eb5c00a045dc73e433bf5');
         $b = new \Doctrine\Common\Cache\ArrayCache();
@@ -94,7 +98,7 @@ class appProdProjectContainer extends Container
         $e->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
         $f = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $e);
         $this->get('doctrine.orm.default_manager_configurator')->configure($f);
-        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager516b0fd6bcbb0_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($f, $this);
+        return $this->services['doctrine.orm.default_entity_manager'] = new \EntityManager516c691254aa5_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager($f, $this);
     }
     protected function getDoctrine_Orm_DefaultManagerConfiguratorService()
     {
@@ -872,6 +876,7 @@ class appProdProjectContainer extends Container
         $instance->addExtension(new \Symfony\Bundle\AsseticBundle\Twig\AsseticExtension($this->get('assetic.asset_factory'), $this->get('templating.name_parser'), false, array(), array(), new \Symfony\Bundle\AsseticBundle\DefaultValueSupplier($this)));
         $instance->addExtension(new \Doctrine\Bundle\DoctrineBundle\Twig\DoctrineExtension());
         $instance->addExtension(new \JMS\SecurityExtraBundle\Twig\SecurityExtension($a));
+        $instance->addExtension($this->get('blog.twig.blog_extension'));
         $instance->addGlobal('app', $this->get('templating.globals'));
         return $instance;
     }
@@ -1042,6 +1047,7 @@ class appProdProjectContainer extends Container
             'secret' => 'be70510964dc9cce24605035ec43c224c0103ffd',
             'database_path' => NULL,
             'blogger_blog.emails.contact_email' => 'no-direccion@dominio.com',
+            'prueba_blog.comments.latest_comment_limit' => 10,
             'controller_resolver.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver',
             'controller_name_converter.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerNameParser',
             'response_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener',
@@ -1483,8 +1489,8 @@ class appProdProjectContainer extends Container
             'jms_di_extra.doctrine_integration' => true,
             'jms_di_extra.cache_warmer.controller_file_blacklist' => array(
             ),
-            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/xampp/htdocs/symfony2/app/cache/prod/jms_diextra/doctrine/EntityManager_516b0fd6bcbb0.php',
-            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager516b0fd6bcbb0_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
+            'jms_di_extra.doctrine_integration.entity_manager.file' => 'C:/xampp/htdocs/symfony2/app/cache/prod/jms_diextra/doctrine/EntityManager_516c691254aa5.php',
+            'jms_di_extra.doctrine_integration.entity_manager.class' => 'EntityManager516c691254aa5_546a8d27f194334ee012bfe64f629947b07e4919\\__CG__\\Doctrine\\ORM\\EntityManager',
             'security.secured_services' => array(
             ),
             'security.access.method_interceptor.class' => 'JMS\\SecurityExtraBundle\\Security\\Authorization\\Interception\\MethodSecurityInterceptor',

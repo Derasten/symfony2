@@ -20,11 +20,11 @@ PruebaInicialBundle_contact:
         
 # src/Prueba/InicialBundle/Resources/config/routing.yml
 PruebaInicialBundle_blog_show:
-    pattern:  /{id}
+    pattern:  /{slug}
     defaults: { _controller: PruebaInicialBundle:Blog:show }
     requirements:
         _method:  GET
-        id: \d+
+        #id: \d+
         
 #De momento lo comento 
 #show:

@@ -122,3 +122,4 @@
 [2013-04-12 17:11:57] request.ERROR: Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET /Prueba/images/misdirection.jpg"" at C:\xampp\htdocs\symfony2\app\cache\prod\classes.php line 3597 [] []
 [2013-04-12 17:11:57] request.ERROR: Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET /Prueba/images/beach.jpg"" at C:\xampp\htdocs\symfony2\app\cache\prod\classes.php line 3597 [] []
 [2013-04-12 17:11:57] request.ERROR: Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET /Prueba/images/one_or_zero.jpg"" at C:\xampp\htdocs\symfony2\app\cache\prod\classes.php line 3597 [] []
+[2013-04-15 22:55:26] request.ERROR: Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET /55"" at C:\xampp\htdocs\symfony2\app\cache\prod\classes.php line 3597 [] []

@@ -82,5 +82,6 @@
   'PruebaInicialBundle:Default:contact.html.twig' => 'C:\\xampp\\htdocs\\symfony2\\src\\Prueba\\InicialBundle/Resources/views/Default/contact.html.twig',
   'PruebaInicialBundle:Default:contactEmail.txt.twig' => 'C:\\xampp\\htdocs\\symfony2\\src\\Prueba\\InicialBundle/Resources/views/Default/contactEmail.txt.twig',
   'PruebaInicialBundle:Default:index.html.twig' => 'C:\\xampp\\htdocs\\symfony2\\src\\Prueba\\InicialBundle/Resources/views/Default/index.html.twig',
+  'PruebaInicialBundle:Default:sidebar.html.twig' => 'C:\\xampp\\htdocs\\symfony2\\src\\Prueba\\InicialBundle/Resources/views/Default/sidebar.html.twig',
   '::base.html.twig' => 'C:/xampp/htdocs/symfony2/app/Resources\\views/base.html.twig',
 );
