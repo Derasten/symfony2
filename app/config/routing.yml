@@ -1,4 +1,12 @@
+login:
+    pattern:   /login
+    defaults:  { _controller: PruebaInicialBundle:Security:login }
+
+login_check:
+    pattern:   /login_check        
+
 prueba_inicial:
     resource: "@PruebaInicialBundle/Resources/config/routing.yml"
     prefix:   /
+
 

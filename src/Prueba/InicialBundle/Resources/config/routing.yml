@@ -17,7 +17,15 @@ PruebaInicialBundle_contact:
     defaults: { _controller: PruebaInicialBundle:Default:contact }
     requirements:
         _method:  GET|POST
-        
+
+#PruebaInicialBundle_login:
+#    pattern:   /login
+#    defaults:  { _controller: PruebaInicialBundle:Security:login }
+   
+#PruebaInicialBundle_login_check:
+#    pattern:   /login_check        
+
+
 # src/Prueba/InicialBundle/Resources/config/routing.yml
 PruebaInicialBundle_blog_show:
     pattern:  /{slug}
