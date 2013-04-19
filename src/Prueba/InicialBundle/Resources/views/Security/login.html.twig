@@ -3,12 +3,11 @@
 
 
 {% block title %}Login{% endblock %}
-{%block error%}
+
+{% block body %}
 {% if error %}
     <div>{{ error.message }}</div>
-{% endif %}
-{%endblock%}
-{% block body %}
+{% endif %}  
 <form action="{{ path('login_check') }}" method="post">
     <label for="username">Username:</label>
     <input type="text" id="username" name="_username" value="{{ last_username }}" />
@@ -23,4 +22,7 @@
 
     <button type="submit">login</button>
 </form>
+    <div>{{salt}}</div>
+    <div>{{user.password}}</div>
+    
 {% endblock %}

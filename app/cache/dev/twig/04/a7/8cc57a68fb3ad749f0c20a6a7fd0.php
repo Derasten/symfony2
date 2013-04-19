@@ -11,7 +11,6 @@ class __TwigTemplate_04a78cc57a68fb3ad749f0c20a6a7fd0 extends Twig_Template
 
         $this->blocks = array(
             'title' => array($this, 'block_title'),
-            'error' => array($this, 'block_error'),
             'body' => array($this, 'block_body'),
         );
     }
@@ -32,29 +31,26 @@ class __TwigTemplate_04a78cc57a68fb3ad749f0c20a6a7fd0 extends Twig_Template
         echo "Login";
     }
 
-    // line 6
-    public function block_error($context, array $blocks = array())
+    // line 7
+    public function block_body($context, array $blocks = array())
     {
-        // line 7
+        // line 8
         if ((isset($context["error"]) ? $context["error"] : $this->getContext($context, "error"))) {
-            // line 8
+            // line 9
             echo "    <div>";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["error"]) ? $context["error"] : $this->getContext($context, "error")), "message"), "html", null, true);
             echo "</div>
 ";
         }
-    }
-
-    // line 11
-    public function block_body($context, array $blocks = array())
-    {
-        // line 12
-        echo "<form action=\"";
+        // line 10
+        echo "  
+<form action=\"";
+        // line 11
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("login_check"), "html", null, true);
         echo "\" method=\"post\">
     <label for=\"username\">Username:</label>
     <input type=\"text\" id=\"username\" name=\"_username\" value=\"";
-        // line 14
+        // line 13
         echo twig_escape_filter($this->env, (isset($context["last_username"]) ? $context["last_username"] : $this->getContext($context, "last_username")), "html", null, true);
         echo "\" />
 
@@ -62,10 +58,19 @@ class __TwigTemplate_04a78cc57a68fb3ad749f0c20a6a7fd0 extends Twig_Template
     <input type=\"password\" id=\"password\" name=\"_password\" />
 
     ";
-        // line 23
+        // line 22
         echo "
     <button type=\"submit\">login</button>
 </form>
+    <div>";
+        // line 25
+        echo twig_escape_filter($this->env, (isset($context["salt"]) ? $context["salt"] : $this->getContext($context, "salt")), "html", null, true);
+        echo "</div>
+    <div>";
+        // line 26
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["user"]) ? $context["user"] : $this->getContext($context, "user")), "password"), "html", null, true);
+        echo "</div>
+    
 ";
     }
 
@@ -81,6 +86,6 @@ class __TwigTemplate_04a78cc57a68fb3ad749f0c20a6a7fd0 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  66 => 23,  58 => 14,  52 => 12,  49 => 11,  41 => 8,  39 => 7,  36 => 6,  30 => 5,);
+        return array (  71 => 26,  67 => 25,  62 => 22,  54 => 13,  49 => 11,  46 => 10,  40 => 9,  38 => 8,  35 => 7,  29 => 5,);
     }
 }

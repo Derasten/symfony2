@@ -23,13 +23,22 @@ class SecurityController extends Controller
             $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
             $session->remove(SecurityContext::AUTHENTICATION_ERROR);
         }
-
+        
+        //$salt = uniqid(mt_rand(), true);
+        $salt = hash('sha1', 'derasten');
+        
+        
+        $em = $this->getDoctrine()->getManager();
+        $usuario = $em->getRepository('PruebaInicialBundle:User')->findOneByUsername('Derasten');
+        
         return $this->render(
             'PruebaInicialBundle:Security:login.html.twig',
             array(
                 // last username entered by the user
                 'last_username' => $session->get(SecurityContext::LAST_USERNAME),
                 'error'         => $error,
+                'salt'          => $salt,
+                'user'          => $usuario,
             )
         );
     }

@@ -38,8 +38,8 @@
     <parameter key="mailer_encryption">ssl</parameter>
     <parameter key="mailer_auth_mode">login</parameter>
     <parameter key="mailer_host">smtp.gmail.com</parameter>
-    <parameter key="mailer_user">reiv.matt@gmail.com</parameter>
-    <parameter key="mailer_password">MazdaRx7fd%5</parameter>
+    <parameter key="mailer_user">your_username</parameter>
+    <parameter key="mailer_password">your_password</parameter>
     <parameter key="locale">en</parameter>
     <parameter key="secret">be70510964dc9cce24605035ec43c224c0103ffd</parameter>
     <parameter key="database_path">null</parameter>
@@ -354,8 +354,8 @@
     <parameter key="swiftmailer.transport.smtp.encryption">ssl</parameter>
     <parameter key="swiftmailer.transport.smtp.port">465</parameter>
     <parameter key="swiftmailer.transport.smtp.host">smtp.gmail.com</parameter>
-    <parameter key="swiftmailer.transport.smtp.username">reiv.matt@gmail.com</parameter>
-    <parameter key="swiftmailer.transport.smtp.password">MazdaRx7fd%5</parameter>
+    <parameter key="swiftmailer.transport.smtp.username">your_username</parameter>
+    <parameter key="swiftmailer.transport.smtp.password">your_password</parameter>
     <parameter key="swiftmailer.transport.smtp.auth_mode">login</parameter>
     <parameter key="swiftmailer.transport.smtp.timeout">30</parameter>
     <parameter key="swiftmailer.transport.smtp.source_ip">null</parameter>
@@ -487,8 +487,8 @@
     <parameter key="jms_di_extra.disable_grep">false</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
     <parameter key="jms_di_extra.cache_warmer.controller_file_blacklist" type="collection"/>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/xampp/htdocs/symfony2/app/cache/dev/jms_diextra/doctrine/EntityManager_516d51be45d8c.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager516d51be45d8c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/xampp/htdocs/symfony2/app/cache/dev/jms_diextra/doctrine/EntityManager_517122ecd50a4.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager517122ecd50a4_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="security.secured_services" type="collection"/>
     <parameter key="security.access.method_interceptor.class">JMS\SecurityExtraBundle\Security\Authorization\Interception\MethodSecurityInterceptor</parameter>
     <parameter key="security.access.method_access_control" type="collection"/>
@@ -1597,18 +1597,27 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider" public="false">
-            <argument type="service" id="security.user.provider.concrete.in_memory"/>
+            <argument type="service" id="security.user.provider.concrete.user_db"/>
             <argument type="service">
               <service class="Symfony\Component\Security\Core\User\UserChecker" public="false"/>
             </argument>
-            <argument>secured_area</argument>
+            <argument>main</argument>
             <argument type="service" id="security.encoder_factory"/>
             <argument>true</argument>
           </service>
         </argument>
         <argument type="service">
+          <service class="Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider" public="false">
+            <argument type="service">
+              <service class="Symfony\Component\Security\Core\User\UserChecker" public="false"/>
+            </argument>
+            <argument>MiPassphrase</argument>
+            <argument>main</argument>
+          </service>
+        </argument>
+        <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>516d51be16ff8</argument>
+            <argument>517122eca6a07</argument>
           </service>
         </argument>
       </argument>
@@ -1677,9 +1686,9 @@
         <service class="Symfony\Bundle\SecurityBundle\Security\FirewallMap" public="false">
           <argument type="service" id="service_container"/>
           <argument type="collection">
-            <argument key="security.firewall.map.context.secured_area" type="service">
+            <argument key="security.firewall.map.context.main" type="service">
               <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
-                <argument>^/</argument>
+                <argument>/.*</argument>
               </service>
             </argument>
           </argument>
@@ -1704,36 +1713,25 @@
       <tag name="templating.helper" alias="logout_url"/>
       <argument type="service" id="service_container"/>
       <argument type="service" id="router"/>
+      <call method="registerListener">
+        <argument>main</argument>
+        <argument>/logout</argument>
+        <argument>logout</argument>
+        <argument>_csrf_token</argument>
+        <argument>null</argument>
+      </call>
     </service>
     <service id="templating.helper.security" class="Symfony\Bundle\SecurityBundle\Templating\Helper\SecurityHelper">
       <tag name="templating.helper" alias="security"/>
       <argument type="service" id="security.context"/>
     </service>
-    <service id="security.user.provider.concrete.in_memory" class="Symfony\Component\Security\Core\User\InMemoryUserProvider" public="false">
-      <call method="createUser">
-        <argument type="service">
-          <service class="Symfony\Component\Security\Core\User\User" public="false">
-            <argument>user</argument>
-            <argument>userpass</argument>
-            <argument type="collection">
-              <argument>ROLE_USER</argument>
-            </argument>
-          </service>
-        </argument>
-      </call>
-      <call method="createUser">
-        <argument type="service">
-          <service class="Symfony\Component\Security\Core\User\User" public="false">
-            <argument>admin</argument>
-            <argument>adminpass</argument>
-            <argument type="collection">
-              <argument>ROLE_ADMIN</argument>
-            </argument>
-          </service>
-        </argument>
-      </call>
+    <service id="security.user.provider.concrete.user_db" class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider" public="false">
+      <argument type="service" id="doctrine"/>
+      <argument>PruebaInicialBundle:User</argument>
+      <argument>username</argument>
+      <argument>null</argument>
     </service>
-    <service id="security.firewall.map.context.secured_area" class="Symfony\Bundle\SecurityBundle\Security\FirewallContext">
+    <service id="security.firewall.map.context.main" class="Symfony\Bundle\SecurityBundle\Security\FirewallContext">
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\ChannelListener" public="false">
@@ -1754,16 +1752,70 @@
           <service class="Symfony\Component\Security\Http\Firewall\ContextListener" public="false">
             <argument type="service" id="security.context"/>
             <argument type="collection">
-              <argument type="service" id="security.user.provider.concrete.in_memory"/>
+              <argument type="service" id="security.user.provider.concrete.user_db"/>
             </argument>
-            <argument>secured_area</argument>
+            <argument>main</argument>
             <argument type="service" id="monolog.logger.security"/>
             <argument type="service" id="event_dispatcher"/>
           </service>
         </argument>
         <argument type="service">
+          <service class="Symfony\Component\Security\Http\Firewall\LogoutListener" public="false">
+            <argument type="service" id="security.context"/>
+            <argument type="service">
+              <service class="Symfony\Component\Security\Http\HttpUtils" public="false">
+                <argument type="service" id="router"/>
+                <argument type="service" id="router"/>
+              </service>
+            </argument>
+            <argument type="service">
+              <service class="Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler" public="false">
+                <argument type="service">
+                  <service class="Symfony\Component\Security\Http\HttpUtils" public="false">
+                    <argument type="service" id="router"/>
+                    <argument type="service" id="router"/>
+                  </service>
+                </argument>
+                <argument>/</argument>
+              </service>
+            </argument>
+            <argument type="collection">
+              <argument key="csrf_parameter">_csrf_token</argument>
+              <argument key="intention">logout</argument>
+              <argument key="logout_path">/logout</argument>
+            </argument>
+            <call method="addHandler">
+              <argument type="service">
+                <service class="Symfony\Component\Security\Http\Logout\SessionLogoutHandler" public="false"/>
+              </argument>
+            </call>
+            <call method="addHandler">
+              <argument type="service">
+                <service class="Symfony\Component\Security\Http\RememberMe\TokenBasedRememberMeServices" public="false">
+                  <argument type="collection">
+                    <argument type="service" id="security.user.provider.concrete.user_db"/>
+                  </argument>
+                  <argument>MiPassphrase</argument>
+                  <argument>main</argument>
+                  <argument type="collection">
+                    <argument key="lifetime">1800</argument>
+                    <argument key="path">/.*</argument>
+                    <argument key="domain">null</argument>
+                    <argument key="name">REMEMBERME</argument>
+                    <argument key="secure">false</argument>
+                    <argument key="httponly">true</argument>
+                    <argument key="always_remember_me">false</argument>
+                    <argument key="remember_me_parameter">_remember_me</argument>
+                  </argument>
+                  <argument type="service" id="monolog.logger.security"/>
+                </service>
+              </argument>
+            </call>
+          </service>
+        </argument>
+        <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener" public="false">
-            <tag name="security.remember_me_aware" id="secured_area" provider="security.user.provider.concrete.in_memory"/>
+            <tag name="security.remember_me_aware" id="main" provider="security.user.provider.concrete.user_db"/>
             <argument type="service" id="security.context"/>
             <argument type="service" id="security.authentication.manager"/>
             <argument type="service">
@@ -1777,7 +1829,7 @@
                 <argument type="service" id="router"/>
               </service>
             </argument>
-            <argument>secured_area</argument>
+            <argument>main</argument>
             <argument type="service">
               <service class="Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler" public="false">
                 <argument type="service">
@@ -1787,14 +1839,14 @@
                   </service>
                 </argument>
                 <argument type="collection">
-                  <argument key="login_path">login</argument>
+                  <argument key="login_path">/login</argument>
                   <argument key="always_use_default_target_path">false</argument>
                   <argument key="default_target_path">/</argument>
                   <argument key="target_path_parameter">_target_path</argument>
                   <argument key="use_referer">false</argument>
                 </argument>
                 <call method="setProviderKey">
-                  <argument>secured_area</argument>
+                  <argument>main</argument>
                 </call>
               </service>
             </argument>
@@ -1808,7 +1860,7 @@
                   </service>
                 </argument>
                 <argument type="collection">
-                  <argument key="login_path">login</argument>
+                  <argument key="login_path">/login</argument>
                   <argument key="failure_path">null</argument>
                   <argument key="failure_forward">false</argument>
                   <argument key="failure_path_parameter">_failure_path</argument>
@@ -1817,7 +1869,7 @@
               </service>
             </argument>
             <argument type="collection">
-              <argument key="check_path">login_check</argument>
+              <argument key="check_path">/login_check</argument>
               <argument key="use_forward">false</argument>
               <argument key="username_parameter">_username</argument>
               <argument key="password_parameter">_password</argument>
@@ -1827,12 +1879,62 @@
             </argument>
             <argument type="service" id="monolog.logger.security"/>
             <argument type="service" id="event_dispatcher"/>
+            <call method="setRememberMeServices">
+              <argument type="service">
+                <service class="Symfony\Component\Security\Http\RememberMe\TokenBasedRememberMeServices" public="false">
+                  <argument type="collection">
+                    <argument type="service" id="security.user.provider.concrete.user_db"/>
+                  </argument>
+                  <argument>MiPassphrase</argument>
+                  <argument>main</argument>
+                  <argument type="collection">
+                    <argument key="lifetime">1800</argument>
+                    <argument key="path">/.*</argument>
+                    <argument key="domain">null</argument>
+                    <argument key="name">REMEMBERME</argument>
+                    <argument key="secure">false</argument>
+                    <argument key="httponly">true</argument>
+                    <argument key="always_remember_me">false</argument>
+                    <argument key="remember_me_parameter">_remember_me</argument>
+                  </argument>
+                  <argument type="service" id="monolog.logger.security"/>
+                </service>
+              </argument>
+            </call>
+          </service>
+        </argument>
+        <argument type="service">
+          <service class="Symfony\Component\Security\Http\Firewall\RememberMeListener" public="false">
+            <argument type="service" id="security.context"/>
+            <argument type="service">
+              <service class="Symfony\Component\Security\Http\RememberMe\TokenBasedRememberMeServices" public="false">
+                <argument type="collection">
+                  <argument type="service" id="security.user.provider.concrete.user_db"/>
+                </argument>
+                <argument>MiPassphrase</argument>
+                <argument>main</argument>
+                <argument type="collection">
+                  <argument key="lifetime">1800</argument>
+                  <argument key="path">/.*</argument>
+                  <argument key="domain">null</argument>
+                  <argument key="name">REMEMBERME</argument>
+                  <argument key="secure">false</argument>
+                  <argument key="httponly">true</argument>
+                  <argument key="always_remember_me">false</argument>
+                  <argument key="remember_me_parameter">_remember_me</argument>
+                </argument>
+                <argument type="service" id="monolog.logger.security"/>
+              </service>
+            </argument>
+            <argument type="service" id="security.authentication.manager"/>
+            <argument type="service" id="monolog.logger.security"/>
+            <argument type="service" id="event_dispatcher"/>
           </service>
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>516d51be16ff8</argument>
+            <argument>517122eca6a07</argument>
             <argument type="service" id="monolog.logger.security"/>
           </service>
         </argument>
@@ -1859,7 +1961,7 @@
               <argument type="service" id="router"/>
             </service>
           </argument>
-          <argument>secured_area</argument>
+          <argument>main</argument>
           <argument type="service">
             <service class="Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint" public="false">
               <argument type="service" id="http_kernel"/>
@@ -1869,7 +1971,7 @@
                   <argument type="service" id="router"/>
                 </service>
               </argument>
-              <argument>login</argument>
+              <argument>/login</argument>
               <argument>false</argument>
             </service>
           </argument>
@@ -2217,8 +2319,8 @@
       <argument type="collection"/>
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager516d51be45d8c_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>C:/xampp/htdocs/symfony2/app/cache/dev/jms_diextra/doctrine/EntityManager_516d51be45d8c.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager517122ecd50a4_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>C:/xampp/htdocs/symfony2/app/cache/dev/jms_diextra/doctrine/EntityManager_517122ecd50a4.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>
@@ -2702,10 +2804,12 @@
     </service>
     <service id="security.encoder_factory" class="Symfony\Component\Security\Core\Encoder\EncoderFactory">
       <argument type="collection">
-        <argument key="Symfony\Component\Security\Core\User\User" type="collection">
-          <argument key="class">%security.encoder.plain.class%</argument>
+        <argument key="Prueba\InicialBundle\Entity\User" type="collection">
+          <argument key="class">%security.encoder.digest.class%</argument>
           <argument key="arguments" type="collection">
+            <argument>sha1</argument>
             <argument>false</argument>
+            <argument>1</argument>
           </argument>
         </argument>
       </argument>
@@ -2814,10 +2918,10 @@
         <argument>ssl</argument>
       </call>
       <call method="setUsername">
-        <argument>reiv.matt@gmail.com</argument>
+        <argument>your_username</argument>
       </call>
       <call method="setPassword">
-        <argument>MazdaRx7fd%5</argument>
+        <argument>your_password</argument>
       </call>
       <call method="setAuthMode">
         <argument>login</argument>

@@ -3,7 +3,11 @@ login:
     defaults:  { _controller: PruebaInicialBundle:Security:login }
 
 login_check:
-    pattern:   /login_check        
+    pattern:   /login_check      
+
+# No es necesario    
+#logout:
+#    pattern: /admin/logout
 
 prueba_inicial:
     resource: "@PruebaInicialBundle/Resources/config/routing.yml"

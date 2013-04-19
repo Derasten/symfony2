@@ -4,27 +4,49 @@ jms_security_extra:
 
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+      Prueba\InicialBundle\Entity\User:
+            algorithm:        sha1
+            encode_as_base64: false
+            iterations:       1
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        in_memory:
-            memory:
-                users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        user_db:
+            entity: { class: PruebaInicialBundle:User, property: username }
 
     firewalls:
-        secured_area:
-            pattern:    ^/
-            anonymous: ~
+        #admin_area:
+        #    provider: user_db
+        #    pattern:    ^/admin
+        #    http_basic: true
+        #    logout: { path: /admin/logout, target: / }
+        main:
+            pattern: /.*
+            provider: user_db
             form_login:
-                login_path:  login
-                check_path:  login_check
-      
+                login_path: /login
+                check_path: /login_check
+                remember_me: true
+            logout:
+                path: /logout
+                target: /
+            remember_me:
+                key: MiPassphrase
+                lifetime: 1800
+                path: /.*
+                domain: ~
+            security: true
+            anonymous: true
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /contact, roles: ROLE_USER }
+        - { path: /about, roles: ROLE_ADMIN }
+        - { path: /.*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
       
       
      #********************************************************************************
